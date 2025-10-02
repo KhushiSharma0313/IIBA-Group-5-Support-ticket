@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Group 5 Project - Support Ticket System</title>
+    <title>IIBA Team - Support Ticket System</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="header">
-        <h1>Group 5 Project - Support Ticket System</h1>
+        <h1>IIBA Team - Support Ticket System</h1>
         <div class="toggle-container">
             <span>Requestor</span>
             <label class="toggle-switch">
@@ -22,17 +22,16 @@
     <div class="container">
         <!-- Requestor View -->
         <div id="requestorView">
-            <!-- Support Ticket Request Form -->
             <div id="requestForm">
                 <h2 class="page-title">Support Ticket Request</h2>
                 <div class="form-container">
                     <div class="form-group">
-                        <label for="requestor">Requestor:</label>
-                        <input type="text" id="requestor" placeholder="Enter your name">
+                        <label for="requestor" class="required">Requestor</label>
+                        <input type="text" id="requestor" value="Current User" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="serviceType">Service Request Type:</label>
+                        <label for="serviceType">Service Request Type</label>
                         <select id="serviceType">
                             <option value="">Select type...</option>
                             <option value="Test Results">Test Results</option>
@@ -42,25 +41,25 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="description">Description of Request:</label>
-                        <textarea id="description" placeholder="Enter detailed description of your request"></textarea>
+                        <label for="description" class="required">Description of Request</label>
+                        <textarea id="description" placeholder="Enter detailed description of your request" required></textarea>
                     </div>
 
                     <div class="form-group">
                         <div class="date-inputs">
                             <div>
-                                <label for="dateRequested">Date Requested:</label>
+                                <label for="dateRequested">Date Requested</label>
                                 <input type="date" id="dateRequested">
                             </div>
                             <div>
-                                <label for="responseNeeded">Response Needed By:</label>
+                                <label for="responseNeeded">Response Needed By</label>
                                 <input type="date" id="responseNeeded">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Response Delivered By:</label>
+                        <label>Response Delivered By</label>
                         <div class="checkbox-group">
                             <label><input type="checkbox" value="Excel"> Excel</label>
                             <label><input type="checkbox" value="Word"> Word</label>
@@ -72,7 +71,6 @@
                 </div>
             </div>
 
-            <!-- Confirmation Notification -->
             <div id="confirmation" class="hidden">
                 <h2 class="page-title">Confirmation Notification</h2>
                 <div class="form-container">
@@ -93,9 +91,7 @@
 
                     <div class="form-group">
                         <label>Status of Request:</label>
-                        <div class="status-badges">
-                            <span class="status-badge status-received">Received</span>
-                        </div>
+                        <span class="status-indicator status-open">Open</span>
                     </div>
 
                     <p style="margin-top: 1rem; font-style: italic;">
@@ -109,7 +105,53 @@
 
         <!-- Support Team View -->
         <div id="supportView" class="hidden">
-            <!-- Request Dashboard -->
+            <!-- Email Notifications -->
+            <div class="notifications-section">
+                <div class="notifications-header">
+                    <span class="email-icon">📧</span>
+                    <h3>Email Notifications</h3>
+                </div>
+                <div id="notificationsList">
+                    <div class="notification-item unread" onclick="toggleNotification(this)">
+                        <div class="notification-subject">New Ticket: TR123 - Test Results for Clinicals</div>
+                        <div class="notification-body">
+                            <strong>From:</strong> System Notifications<br>
+                            <strong>Date:</strong> Oct 2, 2025 9:15 AM<br><br>
+                            A new support ticket has been created.<br>
+                            <strong>Ticket ID:</strong> TR123<br>
+                            <strong>Requestor:</strong> Peldi<br>
+                            <strong>Type:</strong> Test Results<br>
+                            <strong>Description:</strong> TR for Clinicals 9/1/25<br>
+                            <strong>Status:</strong> Open/Unassigned
+                        </div>
+                    </div>
+                    <div class="notification-item" onclick="toggleNotification(this)">
+                        <div class="notification-subject">Status Changed: TA456 - Now In Progress</div>
+                        <div class="notification-body">
+                            <strong>From:</strong> System Notifications<br>
+                            <strong>Date:</strong> Oct 2, 2025 8:30 AM<br><br>
+                            Ticket TA456 status has been updated.<br>
+                            <strong>Previous Status:</strong> Assigned<br>
+                            <strong>New Status:</strong> In Progress<br>
+                            <strong>Assigned To:</strong> Svetlana<br>
+                            <strong>Notes:</strong> Started working on sleep apnea data analysis
+                        </div>
+                    </div>
+                    <div class="notification-item" onclick="toggleNotification(this)">
+                        <div class="notification-subject">Ticket Resolved: VI654 - Vitals Monitoring Setup</div>
+                        <div class="notification-body">
+                            <strong>From:</strong> System Notifications<br>
+                            <strong>Date:</strong> Oct 1, 2025 4:45 PM<br><br>
+                            Ticket VI654 has been resolved.<br>
+                            <strong>Resolved By:</strong> Lawrence<br>
+                            <strong>Resolution Time:</strong> 3 days<br>
+                            <strong>Resolution Notes:</strong> Monitoring system configured and tested successfully
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard -->
             <div id="dashboard">
                 <h2 class="page-title">Request Dashboard</h2>
                 
@@ -117,50 +159,21 @@
                     <div class="dashboard-card">
                         <h3>Completed This Month</h3>
                         <div class="metric">10</div>
-                        <div class="chart-container">
-                            <div class="bar-chart">
-                                <div class="bar" style="height: 40%;">2</div>
-                                <div class="bar" style="height: 60%;">3</div>
-                                <div class="bar" style="height: 80%;">4</div>
-                                <div class="bar" style="height: 30%;">1</div>
-                            </div>
-                        </div>
                     </div>
                     
                     <div class="dashboard-card">
                         <h3>Average Days Open</h3>
                         <div class="metric">2.4</div>
-                        <p style="font-size: 0.9rem; color: #7f8c8d; margin-top: 0.5rem;">Target: ≤ 3.0 days</p>
                     </div>
                     
                     <div class="dashboard-card">
                         <h3>On-Time Completion</h3>
                         <div class="metric">87%</div>
-                        <div style="background: #ecf0f1; height: 8px; border-radius: 4px; margin-top: 1rem;">
-                            <div style="background: #3498db; height: 8px; width: 87%; border-radius: 4px;"></div>
-                        </div>
-                        <p style="font-size: 0.8rem; color: #7f8c8d; margin-top: 0.5rem;">Goal: 91%</p>
                     </div>
                     
                     <div class="dashboard-card">
-                        <h3>Request Types</h3>
-                        <div class="chart-container">
-                            <div class="donut-chart"></div>
-                            <div class="legend">
-                                <div class="legend-item">
-                                    <div class="legend-color" style="background: #3498db;"></div>
-                                    <span>TR (50%)</span>
-                                </div>
-                                <div class="legend-item">
-                                    <div class="legend-color" style="background: #e74c3c;"></div>
-                                    <span>TA (25%)</span>
-                                </div>
-                                <div class="legend-item">
-                                    <div class="legend-color" style="background: #f39c12;"></div>
-                                    <span>VI (25%)</span>
-                                </div>
-                            </div>
-                        </div>
+                        <h3>Open Tickets</h3>
+                        <div class="metric">6</div>
                     </div>
                 </div>
 
@@ -171,25 +184,28 @@
                             <input type="text" class="search-box" placeholder="Search tickets..." id="searchBox" onkeyup="filterTable()">
                             <select class="filter-dropdown" id="statusFilter" onchange="filterTable()">
                                 <option value="">All Status</option>
-                                <option value="Open/Unassigned">Open/Unassigned</option>
-                                <option value="WIP">WIP</option>
-                                <option value="On Hold">On Hold</option>
+                                <option value="Open">Open</option>
                                 <option value="Assigned">Assigned</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Pending">Pending</option>
+                                <option value="On Hold">On Hold</option>
+                                <option value="Resolved">Resolved</option>
+                                <option value="Closed">Closed</option>
                             </select>
                         </div>
                     </div>
                     
                     <div class="table-headers">
-                        <div class="sortable" onclick="sortTable(0)">ID <span class="sort-arrow">▼</span></div>
-                        <div class="sortable" onclick="sortTable(1)">Description <span class="sort-arrow">▼</span></div>
-                        <div class="sortable" onclick="sortTable(2)">Days <span class="sort-arrow">▼</span></div>
-                        <div class="sortable" onclick="sortTable(3)">Requester <span class="sort-arrow">▼</span></div>
-                        <div class="sortable" onclick="sortTable(4)">Status <span class="sort-arrow">▼</span></div>
-                        <div class="sortable" onclick="sortTable(5)">Assignee <span class="sort-arrow">▼</span></div>
+                        <div>ID</div>
+                        <div>Description</div>
+                        <div>Days</div>
+                        <div>Requester</div>
+                        <div>Status</div>
+                        <div>Assignee</div>
                     </div>
                     
-                    <div class="table-content" id="ticketTableBody">
-                        <div class="table-row" onclick="openTicket('TR123')" data-status="Open/Unassigned">
+                    <div id="ticketTableBody">
+                        <div class="table-row" onclick="openTicket('TR123')" data-status="Open">
                             <div><strong>TR123</strong></div>
                             <div>TR for Clinicals 9/1/25</div>
                             <div>4</div>
@@ -197,20 +213,20 @@
                             <div><span class="status-indicator status-open">Open</span></div>
                             <div>-</div>
                         </div>
-                        <div class="table-row" onclick="openTicket('TA456')" data-status="WIP">
+                        <div class="table-row" onclick="openTicket('TA456')" data-status="In Progress">
                             <div><strong>TA456</strong></div>
                             <div>TA for Sleep Apnea Study</div>
                             <div>2</div>
                             <div>Jorge</div>
-                            <div><span class="status-indicator status-wip">WIP</span></div>
+                            <div><span class="status-indicator status-inprogress">In Progress</span></div>
                             <div>Svetlana</div>
                         </div>
-                        <div class="table-row" onclick="openTicket('VI321')" data-status="WIP">
+                        <div class="table-row" onclick="openTicket('VI321')" data-status="Assigned">
                             <div><strong>VI321</strong></div>
                             <div>V for Patient Group 2</div>
                             <div>1</div>
                             <div>Patata</div>
-                            <div><span class="status-indicator status-wip">WIP</span></div>
+                            <div><span class="status-indicator status-assigned">Assigned</span></div>
                             <div>Hector</div>
                         </div>
                         <div class="table-row" onclick="openTicket('TA457')" data-status="On Hold">
@@ -221,20 +237,20 @@
                             <div><span class="status-indicator status-hold">On Hold</span></div>
                             <div>Uvy</div>
                         </div>
-                        <div class="table-row" onclick="openTicket('TR789')" data-status="Open/Unassigned">
+                        <div class="table-row" onclick="openTicket('TR789')" data-status="Pending">
                             <div><strong>TR789</strong></div>
                             <div>TR for Blood Work Analysis</div>
                             <div>1</div>
                             <div>Sarah</div>
-                            <div><span class="status-indicator status-open">Open</span></div>
-                            <div>-</div>
+                            <div><span class="status-indicator status-pending">Pending</span></div>
+                            <div>Lawrence</div>
                         </div>
-                        <div class="table-row" onclick="openTicket('VI654')" data-status="WIP">
+                        <div class="table-row" onclick="openTicket('VI654')" data-status="Resolved">
                             <div><strong>VI654</strong></div>
                             <div>Vitals Monitoring Setup</div>
                             <div>3</div>
                             <div>Mike</div>
-                            <div><span class="status-indicator status-wip">WIP</span></div>
+                            <div><span class="status-indicator status-resolved">Resolved</span></div>
                             <div>Lawrence</div>
                         </div>
                     </div>
@@ -249,18 +265,19 @@
                 <div class="ticket-portal">
                     <div class="form-group">
                         <label>Ticket ID:</label>
-                        <p id="portalTicketId">TR123</p>
+                        <div class="readonly-field" id="portalTicketId">TR123</div>
                     </div>
 
                     <div class="form-group">
                         <label for="ticketStatus">Status:</label>
                         <select id="ticketStatus">
-                            <option value="Open/Unassigned">Open/Unassigned</option>
+                            <option value="Open">Open</option>
                             <option value="Assigned">Assigned</option>
-                            <option value="WIP">WIP</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Pending">Pending</option>
                             <option value="On Hold">On Hold</option>
-                            <option value="Completed">Completed</option>
-                            <option value="Removed">Removed</option>
+                            <option value="Resolved">Resolved</option>
+                            <option value="Closed">Closed</option>
                         </select>
                     </div>
 
@@ -282,7 +299,7 @@
 
                     <div class="form-group">
                         <label>Initial Request:</label>
-                        <p id="initialRequest">TR for Clinicals submitted on 9/1/25 by Peldi</p>
+                        <div class="readonly-field" id="initialRequest">TR for Clinicals submitted on 9/1/25 by Peldi</div>
                     </div>
 
                     <div class="form-group">
